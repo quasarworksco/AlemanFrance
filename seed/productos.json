@@ -1,0 +1,58 @@
+[
+  {
+    "nombre": "Mercedes-Benz Clase S 580",
+    "categoria": "vehiculos",
+    "descripcion": "Sedán de lujo insignia, motor V8 biturbo, importado desde Stuttgart.",
+    "precio": 128000, "moneda": "USD", "origen": "de",
+    "imagen": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=70"
+  },
+  {
+    "nombre": "BMW X7 M60i",
+    "categoria": "vehiculos",
+    "descripcion": "SUV premium de tres filas, tracción xDrive y acabados exclusivos.",
+    "precio": 115000, "moneda": "USD", "origen": "de",
+    "imagen": "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=70"
+  },
+  {
+    "nombre": "Porsche 911 Carrera S",
+    "categoria": "vehiculos",
+    "descripcion": "Deportivo europeo icónico, motor flat-6 turbo. Entrega documentada.",
+    "precio": 142000, "moneda": "USD", "origen": "de",
+    "imagen": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=70"
+  },
+  {
+    "nombre": "Bugatti — Motor W16 (reacondicionado)",
+    "categoria": "repuestos",
+    "descripcion": "Motor de alto desempeño certificado, ideal para restauraciones exclusivas.",
+    "precio": 89000, "moneda": "USD", "origen": "fr",
+    "imagen": "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=800&q=70"
+  },
+  {
+    "nombre": "Caja de transmisión ZF 8HP automática",
+    "categoria": "repuestos",
+    "descripcion": "Componente de transmisión de 8 velocidades para gama alta alemana.",
+    "precio": 6400, "moneda": "USD", "origen": "de",
+    "imagen": "https://images.unsplash.com/photo-1537041373298-55c93da85485?auto=format&fit=crop&w=800&q=70"
+  },
+  {
+    "nombre": "ECU / Sistema electrónico especializado",
+    "categoria": "repuestos",
+    "descripcion": "Unidad de control electrónico programable para motores europeos.",
+    "precio": 2200, "moneda": "USD", "origen": "fr",
+    "imagen": "https://images.unsplash.com/photo-1591290619762-4b7e5c5b9a7b?auto=format&fit=crop&w=800&q=70"
+  },
+  {
+    "nombre": "Caravana Hymer B-Klasse ModernComfort",
+    "categoria": "caravanas",
+    "descripcion": "Casa rodante premium, totalmente equipada. Venta y alquiler disponible.",
+    "precio": 98000, "moneda": "USD", "origen": "de",
+    "imagen": "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=800&q=70"
+  },
+  {
+    "nombre": "Autocaravana Pilote Galaxy (Francia)",
+    "categoria": "caravanas",
+    "descripcion": "Caravana de lujo francesa con diseño aerodinámico. Alquiler por temporada.",
+    "precio": 76000, "moneda": "USD", "origen": "fr",
+    "imagen": "https://images.unsplash.com/photo-1543465077-db45d34b88a5?auto=format&fit=crop&w=800&q=70"
+  }
+]

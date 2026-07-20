@@ -1,0 +1,62 @@
+rules_version = '2';
+
+// =========================================================
+//  Car AlemanFrance — Reglas de seguridad de Firestore
+//  Modelo:
+//    productos   -> catálogo público (lectura libre, escritura solo admin)
+//    pedidos     -> ventas: las crea cualquier cliente; solo el admin
+//                   las lee y las gestiona (panel /admin)
+//    admins/{uid}-> lista de administradores (gestionada desde consola)
+// =========================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- helpers ----
+    function estaAutenticado() {
+      return request.auth != null;
+    }
+    // Un usuario es admin si existe el documento admins/{su-uid}.
+    // (Añade admins creando ese doc en la consola de Firebase.)
+    function esAdmin() {
+      return estaAutenticado()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ---- CATÁLOGO ----
+    match /productos/{id} {
+      allow read: if true;          // visible para todo el mundo
+      allow write: if esAdmin();    // crear/editar/borrar solo admin
+    }
+
+    // ---- PEDIDOS / VENTAS ----
+    match /pedidos/{id} {
+      // Cualquier visitante puede registrar una compra, pero con datos válidos
+      // y sin poder marcarla como pagada/gestionada por su cuenta.
+      allow create: if request.resource.data.estado == 'nuevo'
+        && request.resource.data.total is number
+        && request.resource.data.total >= 0
+        && request.resource.data.items is list
+        && request.resource.data.items.size() > 0
+        && request.resource.data.cliente is map
+        && request.resource.data.cliente.nombre is string
+        && request.resource.data.cliente.email is string;
+
+      // Solo el admin ve, actualiza el estado y elimina pedidos.
+      allow read, update, delete: if esAdmin();
+    }
+
+    // ---- ADMINISTRADORES ----
+    match /admins/{uid} {
+      // Un admin puede comprobar su propio acceso; nadie escribe desde el
+      // cliente (se gestiona desde la consola o con el Admin SDK).
+      allow read: if estaAutenticado() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // ---- Todo lo demás: denegado ----
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
