@@ -78,6 +78,45 @@
 .cta-final__actions .btn--ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
 .cta-final__actions .btn--ghost:hover { border-color: #fff; background: rgba(255,255,255,.08); }
 
+/* ---------- Franja de destacados ---------- */
+.highlights { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+.highlights__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.hl { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; box-shadow: var(--shadow); }
+.hl__ico { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: #f2f5f9; color: var(--ink); border: 1px solid var(--border); flex-shrink: 0; }
+.hl__ico .icon { width: 20px; height: 20px; }
+.hl strong { display: block; font-family: "Sora"; font-size: .98rem; }
+.hl span { font-size: .82rem; color: var(--text-soft); }
+.hl--gold .hl__ico { background: #fbf5e6; color: var(--gold-lux); border-color: #efe3c4; }
+
+/* ---------- Proceso ---------- */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; counter-reset: step; }
+.step { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow); }
+.step__num { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: var(--ink); color: #fff; font-family: "Sora"; font-weight: 700; margin-bottom: 14px; }
+.step h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.step p { color: var(--text-soft); font-size: .9rem; }
+.step__time { display: inline-block; margin-top: 10px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--gold-lux); }
+
+/* ---------- Método de pago ---------- */
+.pay { max-width: 860px; margin: 0 auto; }
+.pay__card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: grid; grid-template-columns: 1.1fr 1fr; }
+.pay__info { padding: 34px 32px; }
+.pay__info h3 { font-size: 1.25rem; margin-bottom: 10px; }
+.pay__info p { color: var(--text-soft); font-size: .93rem; margin-bottom: 18px; }
+.pay__rows { display: flex; flex-direction: column; gap: 12px; }
+.pay__row { display: flex; flex-direction: column; gap: 2px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.pay__row:last-child { border-bottom: 0; padding-bottom: 0; }
+.pay__label { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-soft); font-weight: 600; }
+.pay__value { font-family: "Sora"; font-weight: 600; font-size: 1.02rem; color: var(--text); word-break: break-word; }
+.pay__side { background: var(--ink); color: #fff; padding: 34px 32px; display: flex; flex-direction: column; justify-content: center; gap: 14px; position: relative; }
+.pay__side::before { content:""; position:absolute; top:0; left:0; right:0; height:4px; background: var(--flag-bar); }
+.pay__badge { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; color: #fff; }
+.pay__badge .icon { width: 20px; height: 20px; color: #fff; }
+.pay__side h4 { font-size: 1.4rem; font-family: "Sora"; }
+.pay__side p { color: #c7ccd4; font-size: .88rem; }
+
+@media (max-width: 640px) {
+  .pay__card { grid-template-columns: 1fr; }
+}
 @media (max-width: 560px) {
   .plan__amount { font-size: 2.4rem; }
 }
