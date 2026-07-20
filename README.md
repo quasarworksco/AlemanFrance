@@ -1,6 +1,6 @@
-# Car AlemanFrance — Landing / E-commerce
+# Cars AlemanFrance — Landing / E-commerce
 
-Sitio web con estética **glassmorphism** para **Car AlemanFrance**: importación
+Sitio web con estética **glassmorphism** para **Cars AlemanFrance**: importación
 internacional de vehículos de gama alta, repuestos especializados y caravanas.
 Sedes en **Alemania 🇩🇪** y **Francia 🇫🇷**, envíos a todo **EE. UU.** y nuevo hub
 en **Róterdam 🇳🇱**.

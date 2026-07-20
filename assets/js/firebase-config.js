@@ -1,5 +1,5 @@
 /* =========================================================
-   Configuración de servicios externos — Car AlemanFrance
+   Configuración de servicios externos — Cars AlemanFrance
    ---------------------------------------------------------
    1) FIREBASE / FIRESTORE
       Reemplaza los valores de "firebaseConfig" con los de tu

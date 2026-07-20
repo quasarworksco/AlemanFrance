@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel Admin · Cars AlemanFrance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="./admin.css" />
+</head>
+<body class="admin">
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob blob--de"></span>
+    <span class="blob blob--fr"></span>
+    <span class="blob blob--gold"></span>
+  </div>
+
+  <!-- ---------- Estado de carga ---------- -->
+  <div id="loading" class="admin-loading">
+    <div class="spinner"></div><span>Cargando panel…</span>
+  </div>
+
+  <!-- ---------- LOGIN ---------- -->
+  <section id="login" class="admin-login" hidden>
+    <form class="glass login-card" id="loginForm">
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true"><span class="flag flag--de"></span><span class="flag flag--fr"></span></span>
+        <span class="brand__text">Cars <strong>AlemanFrance</strong></span>
+      </a>
+      <h1>Panel de administración</h1>
+      <p class="muted">Acceso exclusivo para administradores.</p>
+      <label>Correo<input type="email" id="email" required autocomplete="username" placeholder="admin@caralemanfrance.com" /></label>
+      <label>Contraseña<input type="password" id="password" required autocomplete="current-password" placeholder="••••••••" /></label>
+      <button class="btn btn--primary btn--block" type="submit" id="loginBtn">Ingresar</button>
+      <p class="login-error" id="loginError" hidden></p>
+    </form>
+  </section>
+
+  <!-- ---------- DASHBOARD ---------- -->
+  <div id="app" class="admin-app" hidden>
+    <header class="admin-top glass">
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true"><span class="flag flag--de"></span><span class="flag flag--fr"></span></span>
+        <span class="brand__text">Cars <strong>AlemanFrance</strong></span>
+      </a>
+      <nav class="admin-tabs">
+        <button class="tab is-active" data-tab="productos">Productos</button>
+        <button class="tab" data-tab="pedidos">Pedidos <span class="badge" id="pedidosBadge" hidden>0</span></button>
+      </nav>
+      <div class="admin-user">
+        <span id="userEmail" class="muted"></span>
+        <button class="btn btn--ghost" id="logoutBtn">Salir</button>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <!-- ===== PRODUCTOS ===== -->
+      <section class="panel" data-panel="productos">
+        <div class="panel-head">
+          <h2>Catálogo <span class="count" id="prodCount">0</span></h2>
+          <button class="btn btn--primary" id="nuevoProd">+ Nuevo producto</button>
+        </div>
+        <div class="admin-grid" id="prodList" aria-live="polite"></div>
+      </section>
+
+      <!-- ===== PEDIDOS ===== -->
+      <section class="panel" data-panel="pedidos" hidden>
+        <div class="panel-head">
+          <h2>Pedidos / Ventas <span class="count" id="pedCount">0</span></h2>
+          <div class="filtros-estado" id="filtrosEstado">
+            <button class="chip is-active" data-estado="todos">Todos</button>
+            <button class="chip" data-estado="nuevo">Nuevos</button>
+            <button class="chip" data-estado="pagado">Pagados</button>
+            <button class="chip" data-estado="enviado">Enviados</button>
+            <button class="chip" data-estado="entregado">Entregados</button>
+          </div>
+        </div>
+        <div id="pedList" class="ped-list" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ---------- MODAL PRODUCTO ---------- -->
+  <div class="modal" id="prodModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <form class="glass modal-card" id="prodForm">
+      <h3 id="modalTitle">Nuevo producto</h3>
+      <input type="hidden" id="prodId" />
+      <label>Nombre<input type="text" id="f_nombre" required /></label>
+      <div class="grid2">
+        <label>Categoría
+          <select id="f_categoria" required>
+            <option value="vehiculos">Vehículo de gama alta</option>
+            <option value="repuestos">Repuesto especializado</option>
+            <option value="caravanas">Caravana</option>
+          </select>
+        </label>
+        <label>Origen
+          <select id="f_origen">
+            <option value="de">Alemania 🇩🇪</option>
+            <option value="fr">Francia 🇫🇷</option>
+          </select>
+        </label>
+      </div>
+      <label>Descripción<textarea id="f_descripcion" rows="2"></textarea></label>
+      <div class="grid2">
+        <label>Precio<input type="number" id="f_precio" min="0" step="any" /></label>
+        <label>Moneda
+          <select id="f_moneda"><option>USD</option><option>EUR</option></select>
+        </label>
+      </div>
+      <label>Imagen (URL) o publicId de Cloudinary<input type="text" id="f_imagen" placeholder="https://… o caralemanfrance/clase-s" /></label>
+      <div class="modal-actions">
+        <button type="button" class="btn btn--ghost" data-close>Cancelar</button>
+        <button type="submit" class="btn btn--primary" id="saveProd">Guardar</button>
+      </div>
+      <p class="login-error" id="prodError" hidden></p>
+    </form>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script type="module" src="./admin.js"></script>
+</body>
+</html>

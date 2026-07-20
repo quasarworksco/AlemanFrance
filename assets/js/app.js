@@ -1,5 +1,5 @@
 /* =========================================================
-   Car AlemanFrance — Lógica principal
+   Cars AlemanFrance — Lógica principal
    - Carga catálogo desde Firestore (con fallback a datos demo)
    - Optimiza imágenes con Cloudinary
    - Filtros por categoría, menú móvil, año dinámico
@@ -83,7 +83,7 @@ const fmtPrecio = (p, moneda = "USD") =>
   : new Intl.NumberFormat("es-ES", { style: "currency", currency: moneda, maximumFractionDigits: 0 }).format(p);
 
 function waLink(nombre) {
-  const msg = `Hola Car AlemanFrance, me interesa: ${nombre}. ¿Me dan más información y logística de importación?`;
+  const msg = `Hola Cars AlemanFrance, me interesa: ${nombre}. ¿Me dan más información y logística de importación?`;
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 }
 
