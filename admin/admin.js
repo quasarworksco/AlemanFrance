@@ -23,6 +23,11 @@ const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
 const CAT_LABEL = { vehiculos: "Vehículo", repuestos: "Repuesto", caravanas: "Caravana" };
+const ICO = {
+  box: '<svg class="icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>',
+  doc: '<svg class="icon" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
+  warn: '<svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg>'
+};
 const ESTADOS = ["nuevo", "pagado", "enviado", "entregado", "cancelado"];
 const IMG_FALLBACK = "https://res.cloudinary.com/demo/image/upload/w_800,h_500,c_fill/sample.jpg";
 
@@ -113,14 +118,14 @@ async function cargarProductos() {
     const items = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     $("#prodCount").textContent = items.length;
     if (!items.length) {
-      cont.innerHTML = `<div class="empty"><span>📦</span>No hay productos. Crea el primero.</div>`;
+      cont.innerHTML = `<div class="empty">${ICO.box}No hay productos. Crea el primero.</div>`;
       return;
     }
     cont.innerHTML = items.map(p => `
-      <article class="padmin">
+      <article class="padmin ${p.origen === "fr" ? "fr" : "de"}">
         <div class="padmin__media">
           <img src="${imgProd(p)}" alt="${esc(p.nombre)}" loading="lazy" onerror="this.src='${IMG_FALLBACK}'">
-          <span class="padmin__tag">${CAT_LABEL[p.categoria] || "Producto"} · ${p.origen === "fr" ? "🇫🇷" : "🇩🇪"}</span>
+          <span class="padmin__tag">${CAT_LABEL[p.categoria] || "Producto"}<span class="flag flag--${p.origen === "fr" ? "fr" : "de"}"></span></span>
         </div>
         <div class="padmin__body">
           <h3>${esc(p.nombre)}</h3>
@@ -139,7 +144,7 @@ async function cargarProductos() {
     $$("[data-del]", cont).forEach(b => b.onclick = () => borrarProducto(b.dataset.del, cont._items[b.dataset.del]?.nombre));
   } catch (e) {
     console.error(e);
-    cont.innerHTML = `<div class="empty"><span>⚠️</span>Error al cargar productos.</div>`;
+    cont.innerHTML = `<div class="empty">${ICO.warn}Error al cargar productos.</div>`;
   }
 }
 
@@ -182,11 +187,11 @@ $("#prodForm").addEventListener("submit", async (e) => {
   try {
     if (id) {
       await updateDoc(doc(db, COLECCION, id), data);
-      toast("Producto actualizado ✓");
+      toast("Producto actualizado");
     } else {
       data.createdAt = serverTimestamp();
       await addDoc(collection(db, COLECCION), data);
-      toast("Producto creado ✓");
+      toast("Producto creado");
     }
     cerrarModal();
     cargarProductos();
@@ -229,7 +234,7 @@ async function cargarPedidos() {
     pintarPedidos();
   } catch (e) {
     console.error(e);
-    cont.innerHTML = `<div class="empty"><span>⚠️</span>Error al cargar pedidos.</div>`;
+    cont.innerHTML = `<div class="empty">${ICO.warn}Error al cargar pedidos.</div>`;
   }
 }
 
@@ -238,7 +243,7 @@ function pintarPedidos() {
   const lista = FILTRO_PED === "todos" ? PEDIDOS : PEDIDOS.filter(p => p.estado === FILTRO_PED);
   $("#pedCount").textContent = lista.length;
   if (!lista.length) {
-    cont.innerHTML = `<div class="empty"><span>🧾</span>No hay pedidos${FILTRO_PED !== "todos" ? " con este estado" : " todavía"}.</div>`;
+    cont.innerHTML = `<div class="empty">${ICO.doc}No hay pedidos${FILTRO_PED !== "todos" ? " con este estado" : " todavía"}.</div>`;
     return;
   }
   cont.innerHTML = lista.map(pedidoHTML).join("");
@@ -273,7 +278,7 @@ async function cambiarEstado(id, estado) {
   try {
     await updateDoc(doc(db, "pedidos", id), { estado, updatedAt: serverTimestamp() });
     const ped = PEDIDOS.find(p => p.id === id); if (ped) ped.estado = estado;
-    toast(`Pedido → ${estado} ✓`);
+    toast(`Pedido actualizado a "${estado}"`);
     const nuevos = PEDIDOS.filter(p => p.estado === "nuevo").length;
     const badge = $("#pedidosBadge");
     if (nuevos > 0) { badge.textContent = nuevos; badge.hidden = false; } else badge.hidden = true;

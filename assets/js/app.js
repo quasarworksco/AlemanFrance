@@ -102,8 +102,9 @@ function cardHTML(prod) {
     : prod.origen === "de"
       ? '<span class="flag flag--de" title="Origen Alemania"></span>'
       : "";
+  const oClass = prod.origen === "fr" ? "card--fr" : prod.origen === "de" ? "card--de" : "";
   return `
-    <article class="card glass" data-cat="${prod.categoria || "otros"}">
+    <article class="card ${oClass}" data-cat="${prod.categoria || "otros"}">
       <div class="card__media">
         <img src="${img}" alt="${prod.nombre}" loading="lazy"
              onerror="this.src='https://res.cloudinary.com/demo/image/upload/w_800,h_500,c_fill/sample.jpg'">
@@ -128,7 +129,7 @@ function pintarCatalogo() {
   const cont = $("#catalog");
   const lista = FILTRO === "all" ? PRODUCTOS : PRODUCTOS.filter(p => p.categoria === FILTRO);
   if (!lista.length) {
-    cont.innerHTML = `<p class="catalog__status glass">No hay productos en esta categoría por el momento.</p>`;
+    cont.innerHTML = `<p class="catalog__status">No hay productos en esta categoría por el momento.</p>`;
     return;
   }
   cont.innerHTML = lista.map(cardHTML).join("");
