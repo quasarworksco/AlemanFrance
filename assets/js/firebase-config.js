@@ -15,12 +15,12 @@
    ========================================================= */
 
 export const firebaseConfig = {
-  apiKey:            "TU_API_KEY",
-  authDomain:        "tu-proyecto.firebaseapp.com",
-  projectId:         "tu-proyecto",
-  storageBucket:     "tu-proyecto.appspot.com",
-  messagingSenderId: "000000000000",
-  appId:             "1:000000000000:web:xxxxxxxxxxxx"
+  apiKey:            "AIzaSyCGEMq03avRceDfCaOq_OK7s-VZJz_rVXY",
+  authDomain:        "caralemanfrance.firebaseapp.com",
+  projectId:         "caralemanfrance",
+  storageBucket:     "caralemanfrance.firebasestorage.app",
+  messagingSenderId: "645263745788",
+  appId:             "1:645263745788:web:d29547e78b2e99f89d2d79"
 };
 
 // Colección de Firestore que contiene el inventario.
